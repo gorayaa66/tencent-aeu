@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "next": "14.2.3",
     "@tencentcloud/chat-uikit-engine-lite": "^1.0.3",
     "@tencentcloud/chat-uikit-react": "^3.4.6",
     "@tencentcloud/lite-chat": "^1.6.4",
@@ -19,19 +16,23 @@
     "@tencentcloud/tuiroom-engine-js": "~3.4.4",
     "@tencentcloud/uikit-base-component-react": "^1.1.2",
     "@tencentcloud/universal-api": "^2.4.0",
+    "framer-motion": "^12.23.25",
+    "next": "14.2.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "tim-js-sdk": "^2.27.6",
     "trtc-cloud-js-sdk": "^2.10.1",
     "tuikit-atomicx-react": "^4.4.0"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
-    "sass": "^1.94.2"
+    "postcss": "^8",
+    "sass": "^1.94.2",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }

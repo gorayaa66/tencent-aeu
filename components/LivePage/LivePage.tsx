@@ -95,13 +95,14 @@ function LivePage() {
   const hostName =
     currentLive?.liveOwner.userName ||
     currentLive?.liveOwner.userId ||
-    t("scene.live.hostLabel");
+    "John Doe";
   const hostAvatar = currentLive?.liveOwner.avatarUrl;
 
   console.log("current live : ", currentLive);
 
   return (
     <div className={styles.LivePage}>
+      {/* HEADER */}
       <div className={styles.LivePage__header}>
         <div className={styles.LivePage__brand}>
           <span>LiveSuite</span>
@@ -136,6 +137,7 @@ function LivePage() {
         </div>
       </div>
 
+      {/* MAIN */}
       <main className={styles.LivePage__main}>
         <div className={styles.LivePage__content}>
           <div className={styles.LivePage__stageHeader}>
