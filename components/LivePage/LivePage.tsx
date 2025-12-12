@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useUIKit as useChatUIKit } from "@tencentcloud/chat-uikit-react";
 import {
   Toast,
@@ -17,9 +17,9 @@ import {
 import { AudiencePanel } from "../AudiencePanel";
 import { ChatPanel } from "../ChatPanel";
 import styles from "./LivePage.module.scss";
-import { useAutoJoinLive } from "@/hooks/useAutoJoinLive";
 import { genTestUserSig } from "@/debug";
 import { SDK_ID, SECRET_KEY } from "@/constants";
+import Image from "next/image";
 
 const audienceMockList = [
   { id: "viewer-1", name: "Nightbot", badge: "MOD" },
@@ -35,14 +35,9 @@ function LivePage() {
   const { t } = useChatUIKit();
   const { currentLive, joinLive, leaveLive } = useLiveListState();
   const roomEngine = useRoomEngine();
-  const liveIdFromQuery = "live_testing";
   const userId = "john_doe";
-  const [roomId, setRoomId] = useState(liveIdFromQuery);
+  const [roomId, setRoomId] = useState("");
   const [isJoinLoading, setIsJoinLoading] = useState(false);
-
-  useEffect(() => {
-    setRoomId(liveIdFromQuery);
-  }, [liveIdFromQuery]);
 
   const handleLogin = async () => {
     try {
@@ -67,8 +62,6 @@ function LivePage() {
 
   const handleJoinLive = async () => {
     // for testing
-    await handleLogin();
-
     if (status !== LoginStatus.SUCCESS) {
       console.warn("[LivePage] please login before joining live");
       return;
@@ -147,7 +140,18 @@ function LivePage() {
             type="primary"
             loading={isJoinLoading}
           >
-            {t("scene.live.joinLive")}
+            Join Live
+          </Button>
+          <Button
+            className={styles.LivePage__buttonPrimary}
+            onClick={handleLogin}
+            type="primary"
+          >
+            {status === LoginStatus.SUCCESS
+              ? "Logged In"
+              : status === LoginStatus.LOADING
+              ? "Loading..."
+              : "Login"}
           </Button>
           <Button
             className={styles.LivePage__buttonGhost}
@@ -155,7 +159,7 @@ function LivePage() {
             disabled={!currentLive?.liveId}
             type="text"
           >
-            {t("scene.live.leaveLive")}
+            Leave Live
           </Button>
         </div>
       </div>
@@ -166,7 +170,7 @@ function LivePage() {
           <div className={styles.LivePage__stageHeader}>
             <div className={styles.LivePage__stageAvatar}>
               {hostAvatar ? (
-                <img src={hostAvatar} alt={hostName} />
+                <Image src={hostAvatar} alt={hostName} />
               ) : (
                 hostName?.charAt(0) ?? "H"
               )}
