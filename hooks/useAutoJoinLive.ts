@@ -26,6 +26,8 @@ export const useAutoJoinLive = () => {
 
   const handleLogin = async () => {
     try {
+      // TODO: MOVE INTO SERVER SIDE
+      // ! ONLY FOR TESTING FOR TESTING
       const userInfo = genTestUserSig({
         userID: userId,
         SDKAppID: SDK_ID,

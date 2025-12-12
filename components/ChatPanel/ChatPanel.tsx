@@ -1,3 +1,4 @@
+"use client";
 import classNames from "classnames";
 import { BarrageList, BarrageInput } from "tuikit-atomicx-react";
 import styles from "./ChatPanel.module.scss";

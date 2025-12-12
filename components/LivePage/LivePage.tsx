@@ -17,8 +17,9 @@ import {
 import { AudiencePanel } from "../AudiencePanel";
 import { ChatPanel } from "../ChatPanel";
 import styles from "./LivePage.module.scss";
-// import { useTencentAutoLogin } from "@/hooks/auth/useTencentAutoLogin";
-// import { useAuth } from "@/hooks/auth/useAuth";
+import { useAutoJoinLive } from "@/hooks/useAutoJoinLive";
+import { genTestUserSig } from "@/debug";
+import { SDK_ID, SECRET_KEY } from "@/constants";
 
 const audienceMockList = [
   { id: "viewer-1", name: "Nightbot", badge: "MOD" },
@@ -30,21 +31,43 @@ const audienceMockList = [
 ];
 
 function LivePage() {
-  const { status } = useLoginState();
+  const { status, login } = useLoginState();
   const { t } = useChatUIKit();
   const { currentLive, joinLive, leaveLive } = useLiveListState();
   const roomEngine = useRoomEngine();
   const liveIdFromQuery = "live_testing";
+  const userId = "john_doe";
   const [roomId, setRoomId] = useState(liveIdFromQuery);
   const [isJoinLoading, setIsJoinLoading] = useState(false);
-  // const { session } = useAuth();
-  // const { loginIfNeeded } = useTencentAutoLogin(session);
+
   useEffect(() => {
     setRoomId(liveIdFromQuery);
   }, [liveIdFromQuery]);
 
+  const handleLogin = async () => {
+    try {
+      // TODO: MOVE INTO SERVER SIDE
+      // ! ONLY FOR TESTING FOR TESTING
+      const userInfo = genTestUserSig({
+        userID: userId,
+        SDKAppID: SDK_ID,
+        secretKey: SECRET_KEY,
+      });
+
+      // Execute chat login
+      await login({
+        SDKAppID: userInfo.SDKAppID,
+        userID: userInfo.userID,
+        userSig: userInfo.userSig,
+      });
+    } catch (error) {
+      console.error("[AutoJoin] Failed to login:", error);
+    }
+  };
+
   const handleJoinLive = async () => {
-    // await loginIfNeeded();
+    // for testing
+    await handleLogin();
 
     if (status !== LoginStatus.SUCCESS) {
       console.warn("[LivePage] please login before joining live");

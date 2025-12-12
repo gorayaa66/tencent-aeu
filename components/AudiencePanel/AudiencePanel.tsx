@@ -1,3 +1,4 @@
+"use client";
 import classNames from "classnames";
 import styles from "./AudiencePanel.module.scss";
 
@@ -34,10 +35,14 @@ export function AudiencePanel({
         {audienceList.length ? (
           audienceList.map((item) => (
             <div key={item.id} className={styles.audienceItem}>
-              <div className={styles.audienceAvatar}>{item.name.slice(0, 1)}</div>
+              <div className={styles.audienceAvatar}>
+                {item.name.slice(0, 1)}
+              </div>
               <div className={styles.audienceMeta}>
                 <span className={styles.audienceName}>{item.name}</span>
-                {item.badge ? <span className={styles.audienceBadge}>{item.badge}</span> : null}
+                {item.badge ? (
+                  <span className={styles.audienceBadge}>{item.badge}</span>
+                ) : null}
               </div>
             </div>
           ))
