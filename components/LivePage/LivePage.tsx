@@ -61,7 +61,7 @@ function LivePage() {
   };
 
   const handleJoinLive = async () => {
-    // for testing
+    // For Testing
     if (status !== LoginStatus.SUCCESS) {
       console.warn("[LivePage] please login before joining live");
       return;
