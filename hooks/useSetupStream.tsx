@@ -24,7 +24,7 @@ const useSetupStream = () => {
     liveName: "",
     notice: "",
     isMessageDisableForAllUser: false,
-    isGiftEnabled: false,
+    isGiftEnabled: true,
     isLikeEnabled: true,
     isPublicVisible: true,
     isSeatEnabled: true,
@@ -111,14 +111,14 @@ const useSetupStream = () => {
       }
       if (isOpen) {
         instance.setLocalVideoView({
-          streamType: TUIVideoStreamType.K_CAMERA_STREAM as any,
+          streamType: TUIVideoStreamType.K_CAMERA_STREAM_LOW as any,
           view: "preview-camera",
         });
         await instance.openLocalCamera();
       } else {
         await instance.closeLocalCamera();
       }
-      alert("Camera updated successfully");
+      // alert("Camera updated successfully");
     } catch (error) {
       alert("Error updating Camera");
       console.error("Error updating Camera:", error);
@@ -139,7 +139,7 @@ const useSetupStream = () => {
       } else {
         await instance.closeLocalMicrophone();
       }
-      alert("Microphone updated successfully");
+      // alert("Microphone updated successfully");
     } catch (error) {
       alert("Error updating Microphone");
       console.error("Error updating Microphone:", error);
