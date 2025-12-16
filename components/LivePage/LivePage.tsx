@@ -20,6 +20,7 @@ import styles from "./LivePage.module.scss";
 import { genTestUserSig } from "@/debug";
 import { SDK_ID, SECRET_KEY } from "@/constants";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const audienceMockList = [
   { id: "viewer-1", name: "Nightbot", badge: "MOD" },
@@ -38,6 +39,7 @@ function LivePage() {
   const userId = "john_doe";
   const [roomId, setRoomId] = useState("");
   const [isJoinLoading, setIsJoinLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
@@ -116,6 +118,10 @@ function LivePage() {
 
   console.log("current live : ", currentLive);
 
+  const handleSetupLive = () => {
+    router.push("/setup");
+  };
+
   return (
     <div className={styles.LivePage}>
       {/* HEADER */}
@@ -152,6 +158,14 @@ function LivePage() {
               : status === LoginStatus.LOADING
               ? "Loading..."
               : "Login"}
+          </Button>
+
+          <Button
+            className={styles.LivePage__buttonPrimary}
+            onClick={handleSetupLive}
+            type="primary"
+          >
+            Setup Live
           </Button>
           <Button
             className={styles.LivePage__buttonGhost}
